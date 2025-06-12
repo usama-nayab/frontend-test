@@ -12,5 +12,5 @@ export const createPost = (post: { title: string; body: string }) =>
   const res = await axios.put(`/api/posts/${post.id}`, post);
   return res.data;
 }
-export const deletePost = (id: string) =>
+export const deletePost = (id: number) =>
   api.delete(`/posts/${id}`).then((res) => res.data);

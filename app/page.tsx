@@ -7,6 +7,12 @@ import { Loader2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
+type Post = {
+  id: number;
+  title: string;
+  body: string;
+};
+
 export default function Home() {
   const { data: posts, isLoading } = useQuery({
     queryKey: ['posts'],
@@ -29,7 +35,7 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {posts.map((post: any) => (
+        {posts.map((post: Post) => (
           <Card key={post.id} className="group transition hover:shadow-lg">
             <CardHeader>
               <CardTitle className="text-xl font-semibold group-hover:text-primary transition">

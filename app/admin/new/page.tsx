@@ -22,7 +22,7 @@ export default function NewPost() {
     mutationFn: createPost,
     onMutate: () => setLoading(true),
     onSuccess: () => {
-      queryClient.invalidateQueries(['posts']);
+       queryClient.invalidateQueries({ queryKey: ['posts'] as const });
       toast.success('Post created');
       router.push('/admin');
     },

@@ -11,6 +11,12 @@ import { useState } from 'react';
 import { Loader2, SquarePen, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
+type Post = {
+  id: number;
+  title: string;
+  body: string;
+};
+
 export default function AdminPage() {
   const queryClient = useQueryClient();
   const [selectedPost, setSelectedPost] = useState<number | null>(null);
@@ -23,7 +29,7 @@ export default function AdminPage() {
   const deleteMutation = useMutation({
     mutationFn: deletePost,
     onSuccess: () => {
-      queryClient.invalidateQueries(['posts']);
+     queryClient.invalidateQueries({ queryKey: ['posts'] as const });
       toast.success('Post deleted');
     },
     onError: () => {
@@ -47,7 +53,7 @@ export default function AdminPage() {
         </div>
 
         <div>
-        {posts.map((post: any) => (
+        {posts.map((post: Post) => (
           <Card key={post.id} className="shadow hover:shadow-lg h-full transition my-4">
             <CardHeader>
               <h2 className="text-lg font-semibold">{post.title}</h2>

@@ -21,7 +21,7 @@ export default function EditPostPage() {
 
   const { data: post, isLoading } = useQuery({
     queryKey: ['post', id],
-    queryFn: () => getPost(Number(id)),
+    queryFn: () => getPost(id),
   });
 
   const [title, setTitle] = useState('');
@@ -37,7 +37,7 @@ export default function EditPostPage() {
   const updateMutation = useMutation({
     mutationFn: updatePost,
     onSuccess: () => {
-      queryClient.invalidateQueries(['posts']);
+     queryClient.invalidateQueries({ queryKey: ['posts'] as const });
       toast.success('Post updated');
       router.push('/admin');
     },
