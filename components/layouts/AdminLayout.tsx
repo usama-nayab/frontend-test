@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
 import { CircleUserRound } from 'lucide-react';
 import clsx from 'clsx';
-import 'react-quill/dist/quill.snow.css';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
